@@ -34,6 +34,6 @@ func main() {
 	
 	forum.CreateTables()
 
-	log.Println("Server started on http://localhost:8082")
-	log.Fatal(http.ListenAndServe(":8082", nil))
+	log.Println("Server started on http://localhost:8081")
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }

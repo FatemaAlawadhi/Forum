@@ -2,13 +2,12 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
+	"errors"
 	"forum/Error"
 	"html/template"
 	"io"
 	"log"
 	"net/http"
-	"errors"
 	"os"
 	"strconv"
 	"strings"
@@ -69,6 +68,7 @@ func EditPostHandler(w http.ResponseWriter, r *http.Request) {
 		// Get the Title and Content value
 		title := r.FormValue("Title")
 		content := r.FormValue("Content")
+		defaultImage := r.FormValue("defaultImage")
 
 		// Get the selected checkboxes
 		checkboxes := r.Form["checkbox"]
@@ -79,7 +79,7 @@ func EditPostHandler(w http.ResponseWriter, r *http.Request) {
 			log.Fatal("Invalid post ID:", err)
 		}
 
-		UpdatePost(Id, title, content, imgPath, strings.Join(checkboxes, ","))
+		UpdatePost(Id, title, content, imgPath, strings.Join(checkboxes, ","), defaultImage)
 		http.Redirect(w, r, "/Profile", http.StatusFound)
 	} else {
 
@@ -133,9 +133,8 @@ func GetPostData(ID string) (string, string, string, []string) {
 	return title, content, image, categories
 }
 
-func UpdatePost(postID int, title string, content string, image string, category string) {
-	fmt.Println(image)
-	if image == "" {
+func UpdatePost(postID int, title string, content string, image string, category string, DefImg string) {
+	if DefImg == "Def" {
 		query := `
 		UPDATE posts
 		SET title = ?, content = ?, category = ?

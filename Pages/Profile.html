@@ -625,7 +625,6 @@ function Comment(postId, username, userId) {
   if (CreatedComments !== null) {
     CreatedComments.forEach(function (CommentId) {
       CommentBtnsContainer = document.getElementById(`CommentEditDeleteContainer${CommentId}`)
-      console.log(CommentBtnsContainer)
       if (CommentBtnsContainer !== null) {
         CommentBtnsContainer.style.display = "flex";
       }

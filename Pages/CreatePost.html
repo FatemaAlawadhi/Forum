@@ -33,6 +33,7 @@
                 </svg>
               </div>
               <input type="file" id="file" name="file" onchange="handleFileInputChange(this)" />
+              <button type="button" class="Clear">Clear</button>
             </label>
           </div>
           <div class="Category">
@@ -186,6 +187,19 @@
       // File type is not allowed, handle accordingly (e.g., display an error message)
       alert("Please select a valid image file (JPEG, PNG, SVG or GIF).");
       input.value = ""; // Clear the file input value
+    }
+  }
+
+  var ClearButton = document.querySelector('.Clear');
+  ClearButton.addEventListener("click", ClearImage);
+
+  function ClearImage() {
+    var input = document.getElementById("file");
+    input.value = "";
+    var label = input.parentNode;
+    var image = label.querySelector(".selected-image");
+    if (image) {
+      label.removeChild(image);
     }
   }
 </script>

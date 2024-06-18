@@ -33,7 +33,9 @@
                                     </g>
                                 </svg>
                             </div>
+                            <input type="hidden" id="defaultImage" name="defaultImage">
                             <input type="file" id="file" name="file" onchange="handleFileInputChange(this)" />
+                            <button type="button" class="Clear">Clear</button>
                         </label>
                     </div>
                     <div class="Category">
@@ -188,7 +190,7 @@
                 image.style.backgroundImage = "url(" + e.target.result + ")";
                 label.appendChild(image);
             };
-
+            defaultInput.value = "Changed"
             reader.readAsDataURL(file);
         } else {
             // File type is not allowed, handle accordingly (e.g., display an error message)
@@ -210,24 +212,47 @@
         if (isCategorySelected(checkbox.value)) {
             checkbox.checked = true;
         }
-    });
+    })
 
 
+    window.onload = function () {
+        var DefaultImage = "{{.PostImage}}";
 
-    var DefaultImage = "{{.PostImage}}";
-    
-    if (DefaultImage !== "") {
-        setDefaultImage(DefaultImage);
+        if (DefaultImage !== "") {
+            setDefaultImage(DefaultImage);
+            const defaultInput = document.getElementById("defaultImage");
+            defaultInput.value = "Def";
+        }
     }
 
-    function setDefaultImage(imagePath) {
-        var label = document.querySelector(".custum-file-upload");
 
+    var input = document.getElementById("file");
+    var defaultInput = document.getElementById("defaultImage");
+
+    function setDefaultImage(DefaultImage) {
+        var label = input.parentNode;
         var image = document.createElement("div");
         image.className = "selected-image";
-        image.style.backgroundImage = "url(" + imagePath + ")";
 
-        label.insertBefore(image, label.firstChild);
+        // Set background image directly from default path
+        image.style.backgroundImage = `url("${DefaultImage}")`;
+        image.style.color = 'yellow';
+
+        label.appendChild(image);
+    }
+
+
+    var ClearButton = document.querySelector('.Clear');
+    ClearButton.addEventListener("click", ClearImage);
+
+    function ClearImage() {
+        input.value = "";
+        defaultInput.value = "Changed"
+        var label = input.parentNode;
+        var image = label.querySelector(".selected-image");
+        if (image) {
+            label.removeChild(image);
+        }
     }
 </script>
 

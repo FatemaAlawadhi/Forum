@@ -5,6 +5,7 @@
 This project consists in creating a web forum that allows :
 
 - communication between users.
+- creating post and comments.
 - associating categories to posts.
 - liking and disliking posts and comments.
 - filtering posts.
