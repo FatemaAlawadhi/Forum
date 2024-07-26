@@ -57,8 +57,6 @@ open the port
 
 - Fatema Alawadhi
 - Tasneem Mearaj
-- Asma Ahmed
-- Maria Haneef
 
 ### LICENSES
 
