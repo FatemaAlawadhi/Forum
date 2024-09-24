@@ -47,6 +47,10 @@ Two types of filters are used:
 
 Note that profile filter is only available for registered users and refer to the logged in user.
 
+## Example
+
+https://github.com/user-attachments/assets/3ba9a835-db5c-4842-9f22-be21f89c9da0
+
 ### Usage 
 ```
 go run . 
